@@ -1,0 +1,623 @@
+[
+  {
+    "original_prompt": "fetch point cloud",
+    "variations": [
+      "fetch point cloud",
+      "generate point cloud",
+      "retrieve point cloud",
+      "get point cloud",
+      "acquire point cloud",
+      "load point cloud",
+      "obtain point cloud",
+      "collect point cloud",
+      "scan point cloud",
+      "start point cloud"
+    ],
+    "ground_truth": [
+      "say(\"fetching pointcloud.\")\npointcloud = camera_processor.load_point_cloud(samples, offset_y, offset_z, manual_offset, spacing, trim_base, Hide_prev=False, Dbug=dbug, eval_tag=False)",
+      "say(\"fetching pointcloud.\")\npointcloud = camera_processor.load_point_cloud(samples, offset_y, offset_z, manual_offset, spacing, trim_base, Hide_prev=False, Dbug=dbug, eval_tag=False)",
+      "say(\"fetching pointcloud.\")\npointcloud = camera_processor.load_point_cloud(samples, offset_y, offset_z, manual_offset, spacing, trim_base, Hide_prev=False, Dbug=dbug, eval_tag=False)",
+      "say(\"fetching pointcloud.\")\npointcloud = camera_processor.load_point_cloud(samples, offset_y, offset_z, manual_offset, spacing, trim_base, Hide_prev=False, Dbug=dbug, eval_tag=False)",
+      "say(\"fetching pointcloud.\")\npointcloud = camera_processor.load_point_cloud(samples, offset_y, offset_z, manual_offset, spacing, trim_base, Hide_prev=False, Dbug=dbug, eval_tag=False)",
+      "say(\"fetching pointcloud.\")\npointcloud = camera_processor.load_point_cloud(samples, offset_y, offset_z, manual_offset, spacing, trim_base, Hide_prev=False, Dbug=dbug, eval_tag=False)",
+      "say(\"fetching pointcloud.\")\npointcloud = camera_processor.load_point_cloud(samples, offset_y, offset_z, manual_offset, spacing, trim_base, Hide_prev=False, Dbug=dbug, eval_tag=False)",
+      "say(\"fetching pointcloud.\")\npointcloud = camera_processor.load_point_cloud(samples, offset_y, offset_z, manual_offset, spacing, trim_base, Hide_prev=False, Dbug=dbug, eval_tag=False)",
+      "say(\"fetching pointcloud.\")\npointcloud = camera_processor.load_point_cloud(samples, offset_y, offset_z, manual_offset, spacing, trim_base, Hide_prev=False, Dbug=dbug, eval_tag=False)",
+      "say(\"fetching pointcloud.\")\npointcloud = camera_processor.load_point_cloud(samples, offset_y, offset_z, manual_offset, spacing, trim_base, Hide_prev=False, Dbug=dbug, eval_tag=False)"
+    ]
+  },
+  {
+    "original_prompt": "cluster point cloud",
+    "variations": [
+      "cluster point cloud",
+      "group point cloud",
+      "segregate point cloud",
+      "separate point cloud",
+      "classify point cloud",
+      "segment point cloud",
+      "process point cloud",
+	  "cluster object",
+	  "segment object",
+	  "split point cloud"
+    ],
+    "ground_truth": [
+      "clouds = camera_processor.cluster_point_cloud(pointcloud, eps=eps, min_points=min_points) \nif cluster_discard > 0:\n    cld_idx_remove = []\n    for cld_idx in range (len(clouds)):\n        if len(np.array(clouds[cld_idx].points)) <= cluster_discard:\n            cld_idx_remove.append(cld_idx)\n    clouds = np.delete(clouds, cld_idx_remove, axis=0)\n\nif len(clouds)==1:\n    results = clouds[0]\n    say(\"Clustering completed. One object found!\")\nelse:\n    thread_handle = None\n    def start_viewer():\n        global thread_handle\n        thread_handle = PointCloudViewer(clouds, results, view_cam_parameters)\n        thread_handle.run()\n    say(\"There are \" + str(len(clouds)) + \" objects available. Please select the desired objects to inspect!\")\n    results = []\n    thread = threading.Thread(target=start_viewer)\n    thread.start()",
+      "clouds = camera_processor.cluster_point_cloud(pointcloud, eps=eps, min_points=min_points) \nif cluster_discard > 0:\n    cld_idx_remove = []\n    for cld_idx in range (len(clouds)):\n        if len(np.array(clouds[cld_idx].points)) <= cluster_discard:\n            cld_idx_remove.append(cld_idx)\n    clouds = np.delete(clouds, cld_idx_remove, axis=0)\n\nif len(clouds)==1:\n    results = clouds[0]\n    say(\"Clustering completed. One object found!\")\nelse:\n    thread_handle = None\n    def start_viewer():\n        global thread_handle\n        thread_handle = PointCloudViewer(clouds, results, view_cam_parameters)\n        thread_handle.run()\n    say(\"There are \" + str(len(clouds)) + \" objects available. Please select the desired objects to inspect!\")\n    results = []\n    thread = threading.Thread(target=start_viewer)\n    thread.start()",
+      "clouds = camera_processor.cluster_point_cloud(pointcloud, eps=eps, min_points=min_points) \nif cluster_discard > 0:\n    cld_idx_remove = []\n    for cld_idx in range (len(clouds)):\n        if len(np.array(clouds[cld_idx].points)) <= cluster_discard:\n            cld_idx_remove.append(cld_idx)\n    clouds = np.delete(clouds, cld_idx_remove, axis=0)\n\nif len(clouds)==1:\n    results = clouds[0]\n    say(\"Clustering completed. One object found!\")\nelse:\n    thread_handle = None\n    def start_viewer():\n        global thread_handle\n        thread_handle = PointCloudViewer(clouds, results, view_cam_parameters)\n        thread_handle.run()\n    say(\"There are \" + str(len(clouds)) + \" objects available. Please select the desired objects to inspect!\")\n    results = []\n    thread = threading.Thread(target=start_viewer)\n    thread.start()",
+      "clouds = camera_processor.cluster_point_cloud(pointcloud, eps=eps, min_points=min_points) \nif cluster_discard > 0:\n    cld_idx_remove = []\n    for cld_idx in range (len(clouds)):\n        if len(np.array(clouds[cld_idx].points)) <= cluster_discard:\n            cld_idx_remove.append(cld_idx)\n    clouds = np.delete(clouds, cld_idx_remove, axis=0)\n\nif len(clouds)==1:\n    results = clouds[0]\n    say(\"Clustering completed. One object found!\")\nelse:\n    thread_handle = None\n    def start_viewer():\n        global thread_handle\n        thread_handle = PointCloudViewer(clouds, results, view_cam_parameters)\n        thread_handle.run()\n    say(\"There are \" + str(len(clouds)) + \" objects available. Please select the desired objects to inspect!\")\n    results = []\n    thread = threading.Thread(target=start_viewer)\n    thread.start()",
+      "clouds = camera_processor.cluster_point_cloud(pointcloud, eps=eps, min_points=min_points) \nif cluster_discard > 0:\n    cld_idx_remove = []\n    for cld_idx in range (len(clouds)):\n        if len(np.array(clouds[cld_idx].points)) <= cluster_discard:\n            cld_idx_remove.append(cld_idx)\n    clouds = np.delete(clouds, cld_idx_remove, axis=0)\n\nif len(clouds)==1:\n    results = clouds[0]\n    say(\"Clustering completed. One object found!\")\nelse:\n    thread_handle = None\n    def start_viewer():\n        global thread_handle\n        thread_handle = PointCloudViewer(clouds, results, view_cam_parameters)\n        thread_handle.run()\n    say(\"There are \" + str(len(clouds)) + \" objects available. Please select the desired objects to inspect!\")\n    results = []\n    thread = threading.Thread(target=start_viewer)\n    thread.start()",
+      "clouds = camera_processor.cluster_point_cloud(pointcloud, eps=eps, min_points=min_points) \nif cluster_discard > 0:\n    cld_idx_remove = []\n    for cld_idx in range (len(clouds)):\n        if len(np.array(clouds[cld_idx].points)) <= cluster_discard:\n            cld_idx_remove.append(cld_idx)\n    clouds = np.delete(clouds, cld_idx_remove, axis=0)\n\nif len(clouds)==1:\n    results = clouds[0]\n    say(\"Clustering completed. One object found!\")\nelse:\n    thread_handle = None\n    def start_viewer():\n        global thread_handle\n        thread_handle = PointCloudViewer(clouds, results, view_cam_parameters)\n        thread_handle.run()\n    say(\"There are \" + str(len(clouds)) + \" objects available. Please select the desired objects to inspect!\")\n    results = []\n    thread = threading.Thread(target=start_viewer)\n    thread.start()",
+      "clouds = camera_processor.cluster_point_cloud(pointcloud, eps=eps, min_points=min_points) \nif cluster_discard > 0:\n    cld_idx_remove = []\n    for cld_idx in range (len(clouds)):\n        if len(np.array(clouds[cld_idx].points)) <= cluster_discard:\n            cld_idx_remove.append(cld_idx)\n    clouds = np.delete(clouds, cld_idx_remove, axis=0)\n\nif len(clouds)==1:\n    results = clouds[0]\n    say(\"Clustering completed. One object found!\")\nelse:\n    thread_handle = None\n    def start_viewer():\n        global thread_handle\n        thread_handle = PointCloudViewer(clouds, results, view_cam_parameters)\n        thread_handle.run()\n    say(\"There are \" + str(len(clouds)) + \" objects available. Please select the desired objects to inspect!\")\n    results = []\n    thread = threading.Thread(target=start_viewer)\n    thread.start()",
+      "clouds = camera_processor.cluster_point_cloud(pointcloud, eps=eps, min_points=min_points) \nif cluster_discard > 0:\n    cld_idx_remove = []\n    for cld_idx in range (len(clouds)):\n        if len(np.array(clouds[cld_idx].points)) <= cluster_discard:\n            cld_idx_remove.append(cld_idx)\n    clouds = np.delete(clouds, cld_idx_remove, axis=0)\n\nif len(clouds)==1:\n    results = clouds[0]\n    say(\"Clustering completed. One object found!\")\nelse:\n    thread_handle = None\n    def start_viewer():\n        global thread_handle\n        thread_handle = PointCloudViewer(clouds, results, view_cam_parameters)\n        thread_handle.run()\n    say(\"There are \" + str(len(clouds)) + \" objects available. Please select the desired objects to inspect!\")\n    results = []\n    thread = threading.Thread(target=start_viewer)\n    thread.start()",
+      "clouds = camera_processor.cluster_point_cloud(pointcloud, eps=eps, min_points=min_points) \nif cluster_discard > 0:\n    cld_idx_remove = []\n    for cld_idx in range (len(clouds)):\n        if len(np.array(clouds[cld_idx].points)) <= cluster_discard:\n            cld_idx_remove.append(cld_idx)\n    clouds = np.delete(clouds, cld_idx_remove, axis=0)\n\nif len(clouds)==1:\n    results = clouds[0]\n    say(\"Clustering completed. One object found!\")\nelse:\n    thread_handle = None\n    def start_viewer():\n        global thread_handle\n        thread_handle = PointCloudViewer(clouds, results, view_cam_parameters)\n        thread_handle.run()\n    say(\"There are \" + str(len(clouds)) + \" objects available. Please select the desired objects to inspect!\")\n    results = []\n    thread = threading.Thread(target=start_viewer)\n    thread.start()",
+      "clouds = camera_processor.cluster_point_cloud(pointcloud, eps=eps, min_points=min_points) \nif cluster_discard > 0:\n    cld_idx_remove = []\n    for cld_idx in range (len(clouds)):\n        if len(np.array(clouds[cld_idx].points)) <= cluster_discard:\n            cld_idx_remove.append(cld_idx)\n    clouds = np.delete(clouds, cld_idx_remove, axis=0)\n\nif len(clouds)==1:\n    results = clouds[0]\n    say(\"Clustering completed. One object found!\")\nelse:\n    thread_handle = None\n    def start_viewer():\n        global thread_handle\n        thread_handle = PointCloudViewer(clouds, results, view_cam_parameters)\n        thread_handle.run()\n    say(\"There are \" + str(len(clouds)) + \" objects available. Please select the desired objects to inspect!\")\n    results = []\n    thread = threading.Thread(target=start_viewer)\n    thread.start()"
+    ]
+  },
+  {
+    "original_prompt": "generate inspection path",
+    "variations": [
+      "generate inspection path",
+      "create inspection path",
+      "produce inspection path",
+      "define inspection path",
+      "construct inspection path",
+      "plan inspection path",
+	  "build inspection path",
+	  "construct inspection route",
+	  "initiate inspection path generation",
+	  "prepare inspection path"
+    ],
+    "ground_truth": [
+      "thread_handle = None\nprofiles = []\ndef start_selector():\n    global thread_handle\n    thread_handle = Inspector(results, spacing, profiles, view_cam_parameters)\n    thread_handle.run()\n\nsay(\"Please select the desired inspection paths around the selected object.\")\nsay(\"You have the option to choose a path that passes through the center of the object around any axis. Alternatively, you can select a specific profile around an axis to serve as a reference for path generation. You can also direct me to inspect the object from any angle to the left or right.\")\nthread = threading.Thread(target=start_selector)\nthread.start()",
+      "thread_handle = None\nprofiles = []\ndef start_selector():\n    global thread_handle\n    thread_handle = Inspector(results, spacing, profiles, view_cam_parameters)\n    thread_handle.run()\n\nsay(\"Please select the desired inspection paths around the selected object.\")\nsay(\"You have the option to choose a path that passes through the center of the object around any axis. Alternatively, you can select a specific profile around an axis to serve as a reference for path generation. You can also direct me to inspect the object from any angle to the left or right.\")\nthread = threading.Thread(target=start_selector)\nthread.start()",
+      "thread_handle = None\nprofiles = []\ndef start_selector():\n    global thread_handle\n    thread_handle = Inspector(results, spacing, profiles, view_cam_parameters)\n    thread_handle.run()\n\nsay(\"Please select the desired inspection paths around the selected object.\")\nsay(\"You have the option to choose a path that passes through the center of the object around any axis. Alternatively, you can select a specific profile around an axis to serve as a reference for path generation. You can also direct me to inspect the object from any angle to the left or right.\")\nthread = threading.Thread(target=start_selector)\nthread.start()",
+      "thread_handle = None\nprofiles = []\ndef start_selector():\n    global thread_handle\n    thread_handle = Inspector(results, spacing, profiles, view_cam_parameters)\n    thread_handle.run()\n\nsay(\"Please select the desired inspection paths around the selected object.\")\nsay(\"You have the option to choose a path that passes through the center of the object around any axis. Alternatively, you can select a specific profile around an axis to serve as a reference for path generation. You can also direct me to inspect the object from any angle to the left or right.\")\nthread = threading.Thread(target=start_selector)\nthread.start()",
+      "thread_handle = None\nprofiles = []\ndef start_selector():\n    global thread_handle\n    thread_handle = Inspector(results, spacing, profiles, view_cam_parameters)\n    thread_handle.run()\n\nsay(\"Please select the desired inspection paths around the selected object.\")\nsay(\"You have the option to choose a path that passes through the center of the object around any axis. Alternatively, you can select a specific profile around an axis to serve as a reference for path generation. You can also direct me to inspect the object from any angle to the left or right.\")\nthread = threading.Thread(target=start_selector)\nthread.start()",
+      "thread_handle = None\nprofiles = []\ndef start_selector():\n    global thread_handle\n    thread_handle = Inspector(results, spacing, profiles, view_cam_parameters)\n    thread_handle.run()\n\nsay(\"Please select the desired inspection paths around the selected object.\")\nsay(\"You have the option to choose a path that passes through the center of the object around any axis. Alternatively, you can select a specific profile around an axis to serve as a reference for path generation. You can also direct me to inspect the object from any angle to the left or right.\")\nthread = threading.Thread(target=start_selector)\nthread.start()",
+      "thread_handle = None\nprofiles = []\ndef start_selector():\n    global thread_handle\n    thread_handle = Inspector(results, spacing, profiles, view_cam_parameters)\n    thread_handle.run()\n\nsay(\"Please select the desired inspection paths around the selected object.\")\nsay(\"You have the option to choose a path that passes through the center of the object around any axis. Alternatively, you can select a specific profile around an axis to serve as a reference for path generation. You can also direct me to inspect the object from any angle to the left or right.\")\nthread = threading.Thread(target=start_selector)\nthread.start()",
+      "thread_handle = None\nprofiles = []\ndef start_selector():\n    global thread_handle\n    thread_handle = Inspector(results, spacing, profiles, view_cam_parameters)\n    thread_handle.run()\n\nsay(\"Please select the desired inspection paths around the selected object.\")\nsay(\"You have the option to choose a path that passes through the center of the object around any axis. Alternatively, you can select a specific profile around an axis to serve as a reference for path generation. You can also direct me to inspect the object from any angle to the left or right.\")\nthread = threading.Thread(target=start_selector)\nthread.start()",
+      "thread_handle = None\nprofiles = []\ndef start_selector():\n    global thread_handle\n    thread_handle = Inspector(results, spacing, profiles, view_cam_parameters)\n    thread_handle.run()\n\nsay(\"Please select the desired inspection paths around the selected object.\")\nsay(\"You have the option to choose a path that passes through the center of the object around any axis. Alternatively, you can select a specific profile around an axis to serve as a reference for path generation. You can also direct me to inspect the object from any angle to the left or right.\")\nthread = threading.Thread(target=start_selector)\nthread.start()",
+      "thread_handle = None\nprofiles = []\ndef start_selector():\n    global thread_handle\n    thread_handle = Inspector(results, spacing, profiles, view_cam_parameters)\n    thread_handle.run()\n\nsay(\"Please select the desired inspection paths around the selected object.\")\nsay(\"You have the option to choose a path that passes through the center of the object around any axis. Alternatively, you can select a specific profile around an axis to serve as a reference for path generation. You can also direct me to inspect the object from any angle to the left or right.\")\nthread = threading.Thread(target=start_selector)\nthread.start()"
+    ]
+  },
+  {
+    "original_prompt": "create robot targets",
+    "variations": [
+      "create robot targets",
+      "generate robot targets",
+      "define robot targets",
+      "initialize robot targets",
+	  "make robot targets",
+	  "construct robot targets",
+	  "prepare robot targets",
+	  "set up robot targets",
+	  "form robot targets",
+      "build robot targets"
+    ],
+    "ground_truth": [
+      "say(\"creating robot targets\")\nBatch_Profiles = camera_processor.create_robot_targets(move_group, profiles)",
+      "say(\"creating robot targets\")\nBatch_Profiles = camera_processor.create_robot_targets(move_group, profiles)",
+      "say(\"creating robot targets\")\nBatch_Profiles = camera_processor.create_robot_targets(move_group, profiles)",
+      "say(\"creating robot targets\")\nBatch_Profiles = camera_processor.create_robot_targets(move_group, profiles)",
+      "say(\"creating robot targets\")\nBatch_Profiles = camera_processor.create_robot_targets(move_group, profiles)",
+      "say(\"creating robot targets\")\nBatch_Profiles = camera_processor.create_robot_targets(move_group, profiles)",
+      "say(\"creating robot targets\")\nBatch_Profiles = camera_processor.create_robot_targets(move_group, profiles)",
+      "say(\"creating robot targets\")\nBatch_Profiles = camera_processor.create_robot_targets(move_group, profiles)",
+      "say(\"creating robot targets\")\nBatch_Profiles = camera_processor.create_robot_targets(move_group, profiles)",
+      "say(\"creating robot targets\")\nBatch_Profiles = camera_processor.create_robot_targets(move_group, profiles)"
+    ]
+  },
+  {
+    "original_prompt": "run through targets",
+    "variations": [
+      "run through targets",
+      "move through targets",
+      "traverse targets",
+      "execute targets",
+      "navigate through targets",
+	  "iterate over targets",
+	  "follow robot targets",
+	  "go through targets",
+	  "perform target traversal",
+      "step through targets"
+    ],
+    "ground_truth": [
+      "say(\"moving through targets.\")\nfor coords in Batch_Profiles:\n    cam_tgt = coords[0]\n    eef_tgt = coords[1]\n    for id_x in range(0,len(eef_tgt)):  \n        camera_processor.publish_coordinates([cam_tgt[id_x]], \"world\", 'Camera_Target', static = False)   \n        camera_processor.go_to_coord_goal(move_group, eef_tgt[id_x])\n        print(\"Moving to Target:\",id_x+1)\n        time.sleep(tgt_motion_delay)",
+      "say(\"moving through targets.\")\nfor coords in Batch_Profiles:\n    cam_tgt = coords[0]\n    eef_tgt = coords[1]\n    for id_x in range(0,len(eef_tgt)):  \n        camera_processor.publish_coordinates([cam_tgt[id_x]], \"world\", 'Camera_Target', static = False)   \n        camera_processor.go_to_coord_goal(move_group, eef_tgt[id_x])\n        print(\"Moving to Target:\",id_x+1)\n        time.sleep(tgt_motion_delay)",
+      "say(\"moving through targets.\")\nfor coords in Batch_Profiles:\n    cam_tgt = coords[0]\n    eef_tgt = coords[1]\n    for id_x in range(0,len(eef_tgt)):  \n        camera_processor.publish_coordinates([cam_tgt[id_x]], \"world\", 'Camera_Target', static = False)   \n        camera_processor.go_to_coord_goal(move_group, eef_tgt[id_x])\n        print(\"Moving to Target:\",id_x+1)\n        time.sleep(tgt_motion_delay)",
+      "say(\"moving through targets.\")\nfor coords in Batch_Profiles:\n    cam_tgt = coords[0]\n    eef_tgt = coords[1]\n    for id_x in range(0,len(eef_tgt)):  \n        camera_processor.publish_coordinates([cam_tgt[id_x]], \"world\", 'Camera_Target', static = False)   \n        camera_processor.go_to_coord_goal(move_group, eef_tgt[id_x])\n        print(\"Moving to Target:\",id_x+1)\n        time.sleep(tgt_motion_delay)",
+	  "say(\"moving through targets.\")\nfor coords in Batch_Profiles:\n    cam_tgt = coords[0]\n    eef_tgt = coords[1]\n    for id_x in range(0,len(eef_tgt)):  \n        camera_processor.publish_coordinates([cam_tgt[id_x]], \"world\", 'Camera_Target', static = False)   \n        camera_processor.go_to_coord_goal(move_group, eef_tgt[id_x])\n        print(\"Moving to Target:\",id_x+1)\n        time.sleep(tgt_motion_delay)",
+	  "say(\"moving through targets.\")\nfor coords in Batch_Profiles:\n    cam_tgt = coords[0]\n    eef_tgt = coords[1]\n    for id_x in range(0,len(eef_tgt)):  \n        camera_processor.publish_coordinates([cam_tgt[id_x]], \"world\", 'Camera_Target', static = False)   \n        camera_processor.go_to_coord_goal(move_group, eef_tgt[id_x])\n        print(\"Moving to Target:\",id_x+1)\n        time.sleep(tgt_motion_delay)",
+	  "say(\"moving through targets.\")\nfor coords in Batch_Profiles:\n    cam_tgt = coords[0]\n    eef_tgt = coords[1]\n    for id_x in range(0,len(eef_tgt)):  \n        camera_processor.publish_coordinates([cam_tgt[id_x]], \"world\", 'Camera_Target', static = False)   \n        camera_processor.go_to_coord_goal(move_group, eef_tgt[id_x])\n        print(\"Moving to Target:\",id_x+1)\n        time.sleep(tgt_motion_delay)",
+	  "say(\"moving through targets.\")\nfor coords in Batch_Profiles:\n    cam_tgt = coords[0]\n    eef_tgt = coords[1]\n    for id_x in range(0,len(eef_tgt)):  \n        camera_processor.publish_coordinates([cam_tgt[id_x]], \"world\", 'Camera_Target', static = False)   \n        camera_processor.go_to_coord_goal(move_group, eef_tgt[id_x])\n        print(\"Moving to Target:\",id_x+1)\n        time.sleep(tgt_motion_delay)",
+	  "say(\"moving through targets.\")\nfor coords in Batch_Profiles:\n    cam_tgt = coords[0]\n    eef_tgt = coords[1]\n    for id_x in range(0,len(eef_tgt)):  \n        camera_processor.publish_coordinates([cam_tgt[id_x]], \"world\", 'Camera_Target', static = False)   \n        camera_processor.go_to_coord_goal(move_group, eef_tgt[id_x])\n        print(\"Moving to Target:\",id_x+1)\n        time.sleep(tgt_motion_delay)",
+      "say(\"moving through targets.\")\nfor coords in Batch_Profiles:\n    cam_tgt = coords[0]\n    eef_tgt = coords[1]\n    for id_x in range(0,len(eef_tgt)):  \n        camera_processor.publish_coordinates([cam_tgt[id_x]], \"world\", 'Camera_Target', static = False)   \n        camera_processor.go_to_coord_goal(move_group, eef_tgt[id_x])\n        print(\"Moving to Target:\",id_x+1)\n        time.sleep(tgt_motion_delay)"
+    ]
+  },
+  {
+    "original_prompt": "plan and execute path",
+    "variations": [
+      "plan and execute path",
+      "generate and follow path",
+      "create and execute path",
+      "construct and run path",
+	  "prepare and execute path",
+	  "plan and execute trajectory",
+	  "develop and execute path",
+	  "build and execute path",
+	  "create and execute trajectory",
+      "compute and move along path"
+    ],
+    "ground_truth": [
+      "say(\"planning\")\nres,fra = camera_processor.plan_cartesian_path(move_group, Batch_Profiles, eef_step=0.01, jump_threshold=0.0, velocity_scale=0.1, acceleration_scale=0.1)  \nsay(f\"Planned {fra * 100:.2f}% of the path.\")\nsay(\"Executing plan!\")\n\ncamera_processor.execute_plan(move_group, res)",
+      "say(\"planning\")\nres,fra = camera_processor.plan_cartesian_path(move_group, Batch_Profiles, eef_step=0.01, jump_threshold=0.0, velocity_scale=0.1, acceleration_scale=0.1)  \nsay(f\"Planned {fra * 100:.2f}% of the path.\")\nsay(\"Executing plan!\")\n\ncamera_processor.execute_plan(move_group, res)",
+      "say(\"planning\")\nres,fra = camera_processor.plan_cartesian_path(move_group, Batch_Profiles, eef_step=0.01, jump_threshold=0.0, velocity_scale=0.1, acceleration_scale=0.1)  \nsay(f\"Planned {fra * 100:.2f}% of the path.\")\nsay(\"Executing plan!\")\n\ncamera_processor.execute_plan(move_group, res)",
+      "say(\"planning\")\nres,fra = camera_processor.plan_cartesian_path(move_group, Batch_Profiles, eef_step=0.01, jump_threshold=0.0, velocity_scale=0.1, acceleration_scale=0.1)  \nsay(f\"Planned {fra * 100:.2f}% of the path.\")\nsay(\"Executing plan!\")\n\ncamera_processor.execute_plan(move_group, res)",
+      "say(\"planning\")\nres,fra = camera_processor.plan_cartesian_path(move_group, Batch_Profiles, eef_step=0.01, jump_threshold=0.0, velocity_scale=0.1, acceleration_scale=0.1)  \nsay(f\"Planned {fra * 100:.2f}% of the path.\")\nsay(\"Executing plan!\")\n\ncamera_processor.execute_plan(move_group, res)",
+      "say(\"planning\")\nres,fra = camera_processor.plan_cartesian_path(move_group, Batch_Profiles, eef_step=0.01, jump_threshold=0.0, velocity_scale=0.1, acceleration_scale=0.1)  \nsay(f\"Planned {fra * 100:.2f}% of the path.\")\nsay(\"Executing plan!\")\n\ncamera_processor.execute_plan(move_group, res)",
+      "say(\"planning\")\nres,fra = camera_processor.plan_cartesian_path(move_group, Batch_Profiles, eef_step=0.01, jump_threshold=0.0, velocity_scale=0.1, acceleration_scale=0.1)  \nsay(f\"Planned {fra * 100:.2f}% of the path.\")\nsay(\"Executing plan!\")\n\ncamera_processor.execute_plan(move_group, res)",
+      "say(\"planning\")\nres,fra = camera_processor.plan_cartesian_path(move_group, Batch_Profiles, eef_step=0.01, jump_threshold=0.0, velocity_scale=0.1, acceleration_scale=0.1)  \nsay(f\"Planned {fra * 100:.2f}% of the path.\")\nsay(\"Executing plan!\")\n\ncamera_processor.execute_plan(move_group, res)",
+      "say(\"planning\")\nres,fra = camera_processor.plan_cartesian_path(move_group, Batch_Profiles, eef_step=0.01, jump_threshold=0.0, velocity_scale=0.1, acceleration_scale=0.1)  \nsay(f\"Planned {fra * 100:.2f}% of the path.\")\nsay(\"Executing plan!\")\n\ncamera_processor.execute_plan(move_group, res)",
+      "say(\"planning\")\nres,fra = camera_processor.plan_cartesian_path(move_group, Batch_Profiles, eef_step=0.01, jump_threshold=0.0, velocity_scale=0.1, acceleration_scale=0.1)  \nsay(f\"Planned {fra * 100:.2f}% of the path.\")\nsay(\"Executing plan!\")\n\ncamera_processor.execute_plan(move_group, res)"
+    ]
+  },
+  {
+    "original_prompt": "exit viewer",
+    "variations": [
+      "exit viewer",
+      "close viewer",
+      "leave viewer",
+      "terminate viewer",
+	  "shut down viewer",
+	  "end viewer session",
+	  "exit the viewer window",
+	  "quit viewer",
+	  "exit the object viewer",
+      "stop viewer"
+    ],
+    "ground_truth": [
+      "thread_handle.exit_viewer()",
+      "thread_handle.exit_viewer()",
+      "thread_handle.exit_viewer()",
+      "thread_handle.exit_viewer()",
+	  "thread_handle.exit_viewer()",
+	  "thread_handle.exit_viewer()",
+	  "thread_handle.exit_viewer()",
+	  "thread_handle.exit_viewer()",
+	  "thread_handle.exit_viewer()",
+      "thread_handle.exit_viewer()"
+    ]
+  },
+  {
+    "original_prompt": "reset view",
+    "variations": [
+      "reset view",
+      "reset camera view",
+      "reload view",
+      "restore camera view",
+      "refresh view",
+	  "reinitialize view",
+	  "reset the current view",
+	  "reset the object view",
+	  "reset the visualization",
+      "refresh camera view"
+    ],
+    "ground_truth": [
+      "thread_handle.reset_view()",
+      "thread_handle.reset_view()",
+      "thread_handle.reset_view()",
+      "thread_handle.reset_view()",
+      "thread_handle.reset_view()",
+      "thread_handle.reset_view()",
+      "thread_handle.reset_view()",
+      "thread_handle.reset_view()",
+	  "thread_handle.reset_view()",
+      "thread_handle.reset_view()"
+    ]
+  },
+  {
+    "original_prompt": "How many clusters or objects are available?",
+    "variations": [
+      "how many clusters are there",
+      "how many objects are available",
+      "number of clusters",
+      "how many grouped clouds are available",
+	  "How many objects were detected?",
+	  "How many point cloud clusters are there?",
+	  "Tell me the number of clusters found",
+	  "How many segments are available?",
+	  "What is the total number of clusters?",
+      "count objects in point cloud"
+    ],
+    "ground_truth": [
+      "say(f\"There are {len(clouds)} clusters available\")",
+      "say(f\"There are {len(clouds)} clusters available\")",
+      "say(f\"There are {len(clouds)} clusters available\")",
+      "say(f\"There are {len(clouds)} clusters available\")",
+	  "say(f\"There are {len(clouds)} clusters available\")",
+	  "say(f\"There are {len(clouds)} clusters available\")",
+	  "say(f\"There are {len(clouds)} clusters available\")",
+	  "say(f\"There are {len(clouds)} clusters available\")",
+	  "say(f\"There are {len(clouds)} clusters available\")",
+      "say(f\"There are {len(clouds)} clusters available\")"
+    ]
+  },
+  {
+    "original_prompt": "How many profiles are available around x axis?",
+    "variations": [
+      "how many profiles are available around x axis",
+	  "Count the profiles available along x axis",
+      "How many profiles can be selected around y axis?",
+      "Tell me the count of profiles on y axis",
+      "Profiles available around z axis?",
+	  "How many profiles exist along z axis?",
+	  "Give me the number of profiles around x axis",
+	  "How many selectable profiles are there on z axis?",
+	  "What is the total profile count on y axis?",
+	  "Number of profiles present on x axis?"
+    ],
+    "ground_truth": [
+      "say(f\"There are {thread_handle.profiles_available('x')} profiles around x axis available for selection.\")",
+      "say(f\"There are {thread_handle.profiles_available('x')} profiles around x axis available for selection.\")",
+      "say(f\"There are {thread_handle.profiles_available('y')} profiles around y axis available for selection.\")",
+      "say(f\"There are {thread_handle.profiles_available('y')} profiles around y axis available for selection.\")",
+      "say(f\"There are {thread_handle.profiles_available('z')} profiles around z axis available for selection.\")",
+	  "say(f\"There are {thread_handle.profiles_available('z')} profiles around z axis available for selection.\")",
+	  "say(f\"There are {thread_handle.profiles_available('x')} profiles around x axis available for selection.\")",
+	  "say(f\"There are {thread_handle.profiles_available('z')} profiles around z axis available for selection.\")",
+	  "say(f\"There are {thread_handle.profiles_available('y')} profiles around y axis available for selection.\")",
+	  "say(f\"There are {thread_handle.profiles_available('x')} profiles around x axis available for selection.\")"
+    ]
+  },
+  {
+    "original_prompt": "How many profiles are available around x and y axis?",
+    "variations": [
+      "how many profiles around x and y axis",
+      "How many profiles exist around y and x axis?",
+      "Count the profiles available on y and z axis",
+	  "what is the number of selectable profiles along z and x axis?",
+      "How many inspection profiles are there on x and y axis?",
+      "Tell me the number of profiles on x and z axis",
+	  "How many profiles can be selected around y and z axis?",
+	  "Give me the count of profiles on x and y axis",
+	  "How many profiles are defined along y and x axis?",
+	  "What is the number of profiles around z and y axis?"
+    ],
+    "ground_truth": [
+      "say(f\"There are {thread_handle.profiles_available('x')} profiles around x axis and {thread_handle.profiles_available('y')} around y axis available for selection.\")",
+      "say(f\"There are {thread_handle.profiles_available('y')} profiles around y axis and {thread_handle.profiles_available('x')} around x axis available for selection.\")",
+      "say(f\"There are {thread_handle.profiles_available('y')} profiles around y axis and {thread_handle.profiles_available('z')} around z axis available for selection.\")",
+      "say(f\"There are {thread_handle.profiles_available('z')} profiles around z axis and {thread_handle.profiles_available('x')} around x axis available for selection.\")",
+      "say(f\"There are {thread_handle.profiles_available('x')} profiles around x axis and {thread_handle.profiles_available('y')} around y axis available for selection.\")",
+	  "say(f\"There are {thread_handle.profiles_available('x')} profiles around x axis and {thread_handle.profiles_available('z')} around z axis available for selection.\")",
+	  "say(f\"There are {thread_handle.profiles_available('y')} profiles around y axis and {thread_handle.profiles_available('z')} around z axis available for selection.\")",
+	  "say(f\"There are {thread_handle.profiles_available('x')} profiles around x axis and {thread_handle.profiles_available('y')} around y axis available for selection.\")",
+	  "say(f\"There are {thread_handle.profiles_available('y')} profiles around y axis and {thread_handle.profiles_available('x')} around x axis available for selection.\")",
+	  "say(f\"There are {thread_handle.profiles_available('z')} profiles around z axis and {thread_handle.profiles_available('y')} around y axis available for selection.\")"
+    ]
+  },
+  {
+    "original_prompt": "How many profiles are available around x, y and z axis?",
+    "variations": [
+      "how many profiles around x, y and z axis",
+      "What is the number of profiles around x, z, and y axis?",
+      "how many profiles are along all three axes",
+      "total profiles available in xyz directions",
+	  "Count the profiles available around y, x, and z axis.",
+	  "How many selectable profiles exist on y, z, and x axis?",
+	  "Tell me how many profiles are present around z, x, and y axis.",
+	  "How many profiles can be selected around z, y, and x axis?",
+	  "Give me the count of profiles around x, y, and z axis.",
+      "available profiles on x, y, z axes"
+    ],
+    "ground_truth": [
+      "say(f\"There are {thread_handle.profiles_available('x')} profiles around x axis, {thread_handle.profiles_available('y')} around y axis and {thread_handle.profiles_available('z')} around z axis available for selection.\")",
+      "say(f\"There are {thread_handle.profiles_available('x')} profiles around x axis, {thread_handle.profiles_available('y')} around y axis and {thread_handle.profiles_available('z')} around z axis available for selection.\")",
+      "say(f\"There are {thread_handle.profiles_available('x')} profiles around x axis, {thread_handle.profiles_available('y')} around y axis and {thread_handle.profiles_available('z')} around z axis available for selection.\")",
+      "say(f\"There are {thread_handle.profiles_available('x')} profiles around x axis, {thread_handle.profiles_available('y')} around y axis and {thread_handle.profiles_available('z')} around z axis available for selection.\")",
+	  "say(f\"There are {thread_handle.profiles_available('y')} profiles around y axis, {thread_handle.profiles_available('x')} around x axis and {thread_handle.profiles_available('z')} around z axis available for selection.\")",
+	  "say(f\"There are {thread_handle.profiles_available('y')} profiles around y axis, {thread_handle.profiles_available('z')} around z axis and {thread_handle.profiles_available('x')} around x axis available for selection.\")",
+	  "say(f\"There are {thread_handle.profiles_available('z')} profiles around z axis, {thread_handle.profiles_available('x')} around x axis and {thread_handle.profiles_available('y')} around y axis available for selection.\")",
+	  "say(f\"There are {thread_handle.profiles_available('z')} profiles around z axis, {thread_handle.profiles_available('y')} around y axis and {thread_handle.profiles_available('x')} around x axis available for selection.\")",
+	  "say(f\"There are {thread_handle.profiles_available('x')} profiles around x axis, {thread_handle.profiles_available('y')} around y axis and {thread_handle.profiles_available('z')} around z axis available for selection.\")",
+      "say(f\"There are {thread_handle.profiles_available('x')} profiles around x axis, {thread_handle.profiles_available('y')} around y axis and {thread_handle.profiles_available('z')} around z axis available for selection.\")"
+    ]
+  },
+  {
+    "original_prompt": "show next object",
+    "variations": [
+      "show next object",
+      "display next object",
+      "next object please",
+      "move to next object",
+	  "go to next object",
+	  "switch to next object",
+	  "advance to next object",
+	  "load next object",
+	  "view next object",
+      "proceed to next"
+    ],
+    "ground_truth": [
+      "thread_handle.next_pc()",
+      "thread_handle.next_pc()",
+      "thread_handle.next_pc()",
+      "thread_handle.next_pc()",
+	  "thread_handle.next_pc()",
+	  "thread_handle.next_pc()",
+	  "thread_handle.next_pc()",
+	  "thread_handle.next_pc()",
+	  "thread_handle.next_pc()",
+      "thread_handle.next_pc()"
+    ]
+  },
+  {
+    "original_prompt": "show previous object",
+    "variations": [
+      "show previous object",
+      "display previous object",
+      "go back to last object",
+      "last object",
+	  "move to previous object",
+	  "go to previous object",
+	  "switch to previous object",
+	  "return to previous object",
+	  "view previous object",
+      "previous please"
+    ],
+    "ground_truth": [
+      "thread_handle.prev_pc()",
+      "thread_handle.prev_pc()",
+      "thread_handle.prev_pc()",
+      "thread_handle.prev_pc()",
+	  "thread_handle.prev_pc()",
+	  "thread_handle.prev_pc()",
+	  "thread_handle.prev_pc()",
+	  "thread_handle.prev_pc()",
+	  "thread_handle.prev_pc()",
+      "thread_handle.prev_pc()"
+    ]
+  },
+  {
+    "original_prompt": "rotate object",
+    "variations": [
+      "rotate object",
+      "spin object",
+      "start rotating object",
+	  "begin object rotation",
+	  "initiate rotation",
+      "begin rotation",
+	  "enable rotation",
+	  "activate object rotation",
+	  "rotate the object",
+      "turn object"
+    ],
+    "ground_truth": [
+      "thread_handle.rotate_object()",
+      "thread_handle.rotate_object()",
+      "thread_handle.rotate_object()",
+      "thread_handle.rotate_object()",
+	  "thread_handle.rotate_object()",
+	  "thread_handle.rotate_object()",
+	  "thread_handle.rotate_object()",
+	  "thread_handle.rotate_object()",
+	  "thread_handle.rotate_object()",
+      "thread_handle.rotate_object()"
+    ]
+  },
+  {
+    "original_prompt": "stop rotation",
+    "variations": [
+      "stop rotation",
+      "halt rotation",
+      "pause object rotation",
+      "end rotating",
+	  "terminate rotation",
+	  "disable rotation",
+	  "deactivate rotation",
+	  "stop spinning object",
+	  "cease rotation",
+      "freeze rotation"
+    ],
+    "ground_truth": [
+      "thread_handle.stop_rotation()",
+      "thread_handle.stop_rotation()",
+      "thread_handle.stop_rotation()",
+      "thread_handle.stop_rotation()",
+	  "thread_handle.stop_rotation()",
+	  "thread_handle.stop_rotation()",
+	  "thread_handle.stop_rotation()",
+	  "thread_handle.stop_rotation()",
+	  "thread_handle.stop_rotation()",
+      "thread_handle.stop_rotation()"
+    ]
+  },
+  {
+    "original_prompt": "select object",
+    "variations": [
+      "select object",
+      "choose object",
+      "pick object",
+      "mark this object",
+	  "highlight object",
+	  "lock on object",
+	  "focus on object",
+	  "activate object",
+	  "engage object",
+      "target object"
+    ],
+    "ground_truth": [
+      "thread_handle.select_current()",
+      "thread_handle.select_current()",
+      "thread_handle.select_current()",
+      "thread_handle.select_current()",
+	  "thread_handle.select_current()",
+	  "thread_handle.select_current()",
+	  "thread_handle.select_current()",
+	  "thread_handle.select_current()",
+	  "thread_handle.select_current()",
+      "thread_handle.select_current()"
+    ]
+  },
+  {
+    "original_prompt": "deselect object",
+    "variations": [
+      "unselect object",
+      "remove selection",
+      "unmark object",
+      "clear selection",
+      "deactivate object",
+	  "untarget object",
+	  "disengage object",
+	  "unhighlight object",
+	  "clear object selection",
+	  "remove object selection"
+    ],
+    "ground_truth": [
+      "thread_handle.deselect_current()",
+      "thread_handle.deselect_current()",
+      "thread_handle.deselect_current()",
+      "thread_handle.deselect_current()",
+	  "thread_handle.deselect_current()",
+	  "thread_handle.deselect_current()",
+	  "thread_handle.deselect_current()",
+	  "thread_handle.deselect_current()",
+	  "thread_handle.deselect_current()",
+      "thread_handle.deselect_current()"
+    ]
+  },
+  {
+    "original_prompt": "select centered profile around y axis",
+    "variations": [
+      "select centered profile around y axis",
+	  "choose centered profile around x axis",
+      "pick centered profile around z axis",
+      "choose middle profile on y",
+      "get center profile along x",
+	  "highlight centered profile around x axis",
+	  "mark centered profile around z axis",
+	  "fetch centered profile around z axis",
+	  "load centered profile around z axis",
+      "select mid y profile"
+    ],
+    "ground_truth": [
+      "thread_handle.select_centered_profile_around_y()",
+	  "thread_handle.select_centered_profile_around_x()",
+      "thread_handle.select_centered_profile_around_z()",
+      "thread_handle.select_centered_profile_around_y()",
+      "thread_handle.select_centered_profile_around_x()",
+	  "thread_handle.select_centered_profile_around_x()",
+	  "thread_handle.select_centered_profile_around_z()",
+	  "thread_handle.select_centered_profile_around_z()",
+	  "thread_handle.select_centered_profile_around_z()",
+      "thread_handle.select_centered_profile_around_y()"
+    ]
+  },
+  {
+    "original_prompt": "select 15th profile around y axis",
+    "variations": [
+      "select 10th profile around y axis",
+	  "choose 3rd profile around x axis",
+	  "highlight 7th profile around z axis",
+	  "fetch 10th profile around y axis",
+	  "select 1st profile around x axis",
+	  "pick 5th profile around z axis",
+	  "retrieve 8th profile around y axis",
+	  "get 12th profile around z axis",
+	  "load 6th profile around x axis",
+	  "access 2nd profile around z axis"
+    ],
+    "ground_truth": [
+      "thread_handle.select_specific_profile_around_y(10)",
+	  "thread_handle.select_specific_profile_around_x(3)",
+	  "thread_handle.select_specific_profile_around_z(7)",
+	  "thread_handle.select_specific_profile_around_y(10)",
+	  "thread_handle.select_specific_profile_around_x(1)",
+	  "thread_handle.select_specific_profile_around_z(5)",
+	  "thread_handle.select_specific_profile_around_y(8)",
+	  "thread_handle.select_specific_profile_around_z(12)",
+	  "thread_handle.select_specific_profile_around_x(6)",
+	  "thread_handle.select_specific_profile_around_z(2)"
+    ]
+  },
+  {
+    "original_prompt": "select 10 profiles around y axis",
+    "variations": [
+      "select 2 profiles around y axis",
+	  "choose 5 profiles around x axis",
+	  "highlight 8 profiles around z axis",
+	  "fetch 12 profiles around y axis",
+	  "generate 6 profiles around x axis",
+	  "select 15 profiles around z axis",
+	  "retrieve 9 profiles around y axis",
+	  "get 7 profiles around x axis",
+	  "acquire 11 profiles around z axis",
+	  "load 13 profiles around y axis"
+    ],
+    "ground_truth": [
+      "thread_handle.select_multiple_profiles_around_y(n=2)",
+	  "thread_handle.select_multiple_profiles_around_x(n=5)",
+	  "thread_handle.select_multiple_profiles_around_z(n=8)",
+	  "thread_handle.select_multiple_profiles_around_y(n=12)",
+	  "thread_handle.select_multiple_profiles_around_x(n=6)",
+	  "thread_handle.select_multiple_profiles_around_z(n=15)",
+	  "thread_handle.select_multiple_profiles_around_y(n=9)",
+	  "thread_handle.select_multiple_profiles_around_x(n=7)",
+	  "thread_handle.select_multiple_profiles_around_z(n=11)",
+	  "thread_handle.select_multiple_profiles_around_y(n=13)"
+    ]
+  },
+  {
+    "original_prompt": "select profile 45 degrees towards left of the object",
+    "variations": [
+      "select profile 45 degrees towards left of the object",
+	  "choose profile 30 degrees towards left of the object",
+	  "select profile 60 degrees towards right of the object",
+	  "highlight profile 90 degrees towards left of the object",
+	  "fetch profile 15 degrees towards right of the object",
+	  "retrieve profile 45 degrees towards right of the object",
+	  "generate profile 20 degrees towards left of the object",
+	  "acquire profile 75 degrees towards right of the object",
+	  "get profile 10 degrees towards left of the object",
+	  "obtain profile 25 degrees towards right of the object"
+    ],
+    "ground_truth": [
+      "thread_handle.select_profile_with_angle(angle_degrees=45, direction='left')",
+	  "thread_handle.select_profile_with_angle(angle_degrees=30, direction='left')",
+	  "thread_handle.select_profile_with_angle(angle_degrees=60, direction='right')",
+	  "thread_handle.select_profile_with_angle(angle_degrees=90, direction='left')",
+	  "thread_handle.select_profile_with_angle(angle_degrees=15, direction='right')",
+	  "thread_handle.select_profile_with_angle(angle_degrees=45, direction='right')",
+	  "thread_handle.select_profile_with_angle(angle_degrees=20, direction='left')",
+	  "thread_handle.select_profile_with_angle(angle_degrees=75, direction='right')",
+	  "thread_handle.select_profile_with_angle(angle_degrees=10, direction='left')",
+	  "thread_handle.select_profile_with_angle(angle_degrees=25, direction='right')"
+    ]
+  },
+  {
+    "original_prompt": "select 10 profiles 45 degrees towards right of the object",
+    "variations": [
+      "select 10 profiles 45 degrees towards right of the object",
+	  "choose 5 profiles 30 degrees towards left of the object",
+	  "fetch 12 profiles 60 degrees towards right of the object",
+	  "retrieve 8 profiles 15 degrees towards left of the object",
+	  "highlight 6 profiles 75 degrees towards right of the object",
+	  "select 10 profiles 90 degrees towards left of the object",
+	  "get 7 profiles 20 degrees towards right of the object",
+	  "acquire 9 profiles 45 degrees towards left of the object",
+	  "generate 11 profiles 30 degrees towards right of the object",
+	  "load 4 profiles 60 degrees towards left of the object"
+    ],
+    "ground_truth": [
+      "thread_handle.select_multiple_profiles_with_angle(angle_degrees=45, direction='right', n=10)",
+	  "thread_handle.select_multiple_profiles_with_angle(angle_degrees=30, direction='left', n=5)",
+	  "thread_handle.select_multiple_profiles_with_angle(angle_degrees=60, direction='right', n=12)",
+	  "thread_handle.select_multiple_profiles_with_angle(angle_degrees=15, direction='left', n=8)",
+	  "thread_handle.select_multiple_profiles_with_angle(angle_degrees=75, direction='right', n=6)",
+	  "thread_handle.select_multiple_profiles_with_angle(angle_degrees=90, direction='left', n=10)",
+	  "thread_handle.select_multiple_profiles_with_angle(angle_degrees=20, direction='right', n=7)",
+	  "thread_handle.select_multiple_profiles_with_angle(angle_degrees=45, direction='left', n=9)",
+	  "thread_handle.select_multiple_profiles_with_angle(angle_degrees=30, direction='right', n=11)",
+	  "thread_handle.select_multiple_profiles_with_angle(angle_degrees=60, direction='left', n=4)"
+    ]
+  }
+]
