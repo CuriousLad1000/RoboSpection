@@ -103,7 +103,7 @@ installed.
           sudo apt update
           ```
     - ```console
-      cd ~/ws_Auto_path_planner
+      cd RoboSpection
       ```
 
     - ```console
