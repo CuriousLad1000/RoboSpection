@@ -81,7 +81,7 @@ installed.
 -   Download / Clone this repository
 
     -   ```console 
-		git clone <https://github.com/CuriousLad1000/RoboSpection.git>
+		git clone https://github.com/CuriousLad1000/RoboSpection.git
 		```
 
 -   Configure folder to prepare for build.
