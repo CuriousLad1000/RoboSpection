@@ -1372,15 +1372,48 @@ class CameraProcessor:
             object_mesh.compute_vertex_normals()
         # Save mesh to a temporary file
         o3d.io.write_triangle_mesh("mesh.stl", object_mesh)
+        
+        # Add to planning scene
+        coll_result = subprocess.run([sys.executable,  "add_to_scene.py"])
+        print("Scene updated!\nObstacle avoidance active!")
+        
 
         # Add to planning scene
-        pose = PoseStamped()
-        pose.header.frame_id = "world"
-        pose.pose.orientation.w = 1.0
-        planning_scene.add_mesh("pointcloud_mesh", pose, "mesh.stl")
-        print("Scene updated!\nObstacle avoidance active!")
+       # pose = PoseStamped()
+       # pose.header.frame_id = "world"
+       # pose.pose.orientation.w = 1.0
+       # planning_scene.add_mesh("pointcloud_mesh", pose, "mesh.stl")
+       # print("Scene updated!\nObstacle avoidance active!")
 
+    def create_mesh(self, alpha = 0, flip=False, obstacle=True):
+        object_mesh = o3d.geometry.TriangleMesh()
+        radii = [0.0005, 0.001, 0.002, 0.005, 0.01, 0.02, 0.04, 0.1]
+        
+        pcd = self.load_point_cloud(self.samples, self.offset_y, self.offset_z, self.manual_offset, 0.01, self.trim_base, Hide_prev=True, Dbug=False, eval_tag=True) #eval_tag :generates wrt world
+        print(f"Created collision cloud with {len(pcd.points)} points.")
+        #pcd.estimate_normals(search_param=o3d.geometry.KDTreeSearchParamHybrid(radius=0.06, max_nn=30)) #radius in meters
+        #pcd.orient_normals_consistent_tangent_plane( k = round( len(pcd.points) / 6) )
+        #pcd.orient_normals_towards_camera_location(camera_location=[0, 0, 1])
+        if flip:
+            pcd.normals = o3d.utility.Vector3dVector(-np.asarray(pcd.normals)) #Orient normals outwards
 
+        results = self.cluster_point_cloud(pcd, eps=self.eps, min_points=self.min_points, obstacle=obstacle) #segment to get individual objects, better for mesh creation
+
+        if alpha > 0:
+            print(f"Using Alpha shapes.  alpha={alpha:.3f}")
+
+            for result in results:
+                tetra_mesh, pt_map = o3d.geometry.TetraMesh.create_from_point_cloud(result)
+                mesh = o3d.geometry.TriangleMesh.create_from_point_cloud_alpha_shape(result, alpha, tetra_mesh, pt_map)
+                object_mesh += mesh
+                object_mesh.compute_vertex_normals()
+        else:
+            for result in results:
+                object_mesh += o3d.geometry.TriangleMesh.create_from_point_cloud_ball_pivoting(result, o3d.utility.DoubleVector(radii))
+
+            object_mesh.compute_vertex_normals()
+        # Save mesh to a temporary file
+        o3d.io.write_triangle_mesh("mesh.stl", object_mesh)
     
     
     
