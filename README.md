@@ -65,7 +65,7 @@ installed.
 ## Installation
 
 -   Install Moveit and test with Franka panda
-    [Tutorial](https://ros-planning.github.io/moveit_tutorials/index.html)
+    [Tutorial](https://web.archive.org/web/20240223055617/https://ros-planning.github.io/moveit_tutorials/index.html)
 
 -   Make sure you can launch Rviz and Gazebo and able to use Moveit
     planner with Panda summoned in Gazebo and Rviz environment.
@@ -94,7 +94,7 @@ installed.
 		rosdep install -y \--from-paths . \--ignore-src \--rosdistro noetic
 		```
 
-    - **Note** In case an upstream package is not (yet) available from the standard ROS repositories or if you experience any build errors in those packages, please try to fetch the latest release candidates from the ROS testing repositories instead. [Source](https://ros-planning.github.io/moveit_tutorials/doc/getting_started/getting_started.html#install-ros-and-catkin)
+    - **Note** In case an upstream package is not (yet) available from the standard ROS repositories or if you experience any build errors in those packages, please try to fetch the latest release candidates from the ROS testing repositories instead. [Source](https://web.archive.org/web/20230331054045/https://ros-planning.github.io/moveit_tutorials/doc/getting_started/getting_started.html#install-ros-and-catkin)
 
         - ```console
           sudo sh -c 'echo "deb http://packages.ros.org/ros-testing/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
