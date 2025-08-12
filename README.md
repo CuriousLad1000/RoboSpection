@@ -318,6 +318,7 @@ questions.
 ## Videos
 
 <br/>
+
 **Note:** Please try a different web browser if the videos fail to playback.
 
 <br/>
