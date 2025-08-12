@@ -317,6 +317,11 @@ questions.
 
 ## Videos
 
+<br/>
+**Note:** Please try a different web browser if the videos fail to playback.
+
+<br/>
+
 **Engine block inspection**
 
 https://github.com/user-attachments/assets/41f2dfbc-b09c-4193-9cbd-f5924491ea19
@@ -347,9 +352,7 @@ https://github.com/user-attachments/assets/852b54a6-3c7f-4cc1-8263-40984d46c5d2
 https://github.com/user-attachments/assets/83b68070-1c51-4078-8ae1-8506eb676647
 
 
-**Note 1:** Please check the Demo_Photos_and_Videos directory for full videos.
-<br/>
-**Note 2:** Please try a different web browser if the videos are not visible.
+**Note:** Please check the Demo_Photos_and_Videos directory for full videos.
 
 <br/>
 
