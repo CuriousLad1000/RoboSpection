@@ -13,10 +13,12 @@ import moveit_msgs
 from scipy.spatial.transform import Rotation as R
 from scipy.spatial import distance
 from scipy import spatial
-from sensor_msgs.msg import Image, CameraInfo
+from sensor_msgs.msg import Image, CameraInfo, CompressedImage
 from geometry_msgs.msg import TransformStamped, Pose, PoseStamped
 from realsense2_camera.msg import Extrinsics
 from cv_bridge import CvBridge
+import cv2
+import struct
 from ast import literal_eval
 
 import copy
@@ -37,11 +39,15 @@ class CameraProcessor:
     def __init__(self, samples=1, offset_y=0.13, offset_z=0.0, trim_base=0.05, manual_offset=0.0, 
                  cluster_discard=0, spacing=0.01, eps=0.05, min_points=10, cluster_trim=0.01, tgt_coord_samples=3, 
                  tgt_final_trim=0.0, tgt_reverse=True, tgt_preview=True, z_offset=0.3, coord_skip=0, tgt_motion_delay=0.1, 
-                 tgt_save=True, dbug=False, robo=True):
+                 selected_pose_joint=[-0.0004, -0.0906,  0.0006, -1.0642, -0.0006,  0.9526,  0.7866], 
+                 tgt_save=True, dbug=False, dry_run=False, phy=False, compressed=False):
         """
         Initializes the CameraProcessor with a bridge for image conversions and a TF buffer for transformations.
         
-        :param robo: default True - initializes ROS controls, transforms, broadcasts, buffers, CvBridge, rospy
+        :selected_pose_joint: defaults to initial_coordinates_down_high_joint coordinates. Takes 7 joint values.
+        :param dry_run: default True - initializes ROS controls, transforms, broadcasts, buffers, CvBridge, rospy
+        :param phy: default False - Configures the program to be used with real hardware.
+        :param compressed: default False - Configures the program to use compressed depth topics.
         :param bridge: cv_bridge for converting ROS images to OpenCV format.
         :param tfbuffer: TF2 buffer for handling transformations.
         """
@@ -62,10 +68,14 @@ class CameraProcessor:
         self.z_offset = z_offset
         self.coord_skip = coord_skip
         self.tgt_motion_delay = tgt_motion_delay
+        self.selected_pose_joint = selected_pose_joint
         self.tgt_save = tgt_save
         self.dbug = dbug
+        self.phy = phy
+        self.dry_run = dry_run
+        self.compressed = compressed
         
-        if robo==True:
+        if dry_run==False:
             self.bridge = CvBridge() #bridge
             self.tfbuffer = tf2_ros.Buffer() #tfbuffer
             self.br = tf2_ros.TransformBroadcaster()
@@ -80,17 +90,60 @@ class CameraProcessor:
         self.up_def = [ -0.27349211301491638, 0.25436583492870624, -0.92763143874043985 ]
         self.zoom_def = 1.02
 
+    def decode_compressed_depth(self, msg):
+        # Parse header
+        header_size = 12
+        if len(msg.data) < header_size:
+            raise ValueError("CompressedDepth message too short to contain header")
+
+        depth_format = msg.format.split(';')[0].strip()
+        if depth_format != "16UC1":
+            raise ValueError(f"Unsupported depth format: {depth_format}")
+
+        # First 12 bytes: depth quantization parameters
+        depth_param_bytes = msg.data[:header_size]
+        raw_data = msg.data[header_size:]
+
+        # Decode depth compression parameters
+        depth_quant_a, depth_quant_b = struct.unpack("ff", depth_param_bytes[:8])
+        # (We don’t use these unless encoding was float-depth)
+
+        # Decode PNG
+        np_arr = np.frombuffer(raw_data, dtype=np.uint8)
+        img = cv2.imdecode(np_arr, cv2.IMREAD_UNCHANGED)
+        if img is None:
+            raise ValueError("cv2.imdecode failed on compressedDepth PNG")
+
+        if img.dtype != np.uint16:
+            raise ValueError(f"Expected 16UC1 decoded image, got dtype={img.dtype}")
+
+        return img
+        
+        
     def grab_frame(self):
         """
         Captures color and depth frames from the camera.
 
         :return: A tuple containing (color_frame, depth_frame) as OpenCV images.
         """
-        frame_color = rospy.wait_for_message('/camera/color/image_raw', Image, timeout=None)
-        cv_image_color = self.bridge.imgmsg_to_cv2(frame_color, desired_encoding='rgb8')
-
-        frame_depth = rospy.wait_for_message('/camera/depth/image_raw', Image, timeout=None)
-        cv_image_depth = self.bridge.imgmsg_to_cv2(frame_depth)
+        
+        if self.compressed:
+            frame_color = rospy.wait_for_message('/camera/color/image_raw/compressed', CompressedImage, timeout=None)
+            frame_color = np.frombuffer(frame_color.data, np.uint8)
+            cv_image_color = cv2.imdecode(frame_color, cv2.IMREAD_COLOR)
+            if self.phy:
+                frame_depth = rospy.wait_for_message('/camera/depth/image_rect_raw/compressedDepth', CompressedImage, timeout=None) #wait_for_message(topic, topic_type, timeout=None): 
+            else:
+                frame_depth = rospy.wait_for_message('/camera/depth/image_raw/compressedDepth', CompressedImage, timeout=None)
+            cv_image_depth = self.decode_compressed_depth(frame_depth)
+        else:
+            frame_color = rospy.wait_for_message('/camera/color/image_raw', Image, timeout=None)
+            cv_image_color = self.bridge.imgmsg_to_cv2(frame_color, desired_encoding='rgb8')
+            if self.phy:
+                frame_depth = rospy.wait_for_message('/camera/depth/image_rect_raw', Image, timeout=None) #wait_for_message(topic, topic_type, timeout=None): 
+            else:
+                frame_depth = rospy.wait_for_message('/camera/depth/image_raw', Image, timeout=None)
+            cv_image_depth = self.bridge.imgmsg_to_cv2(frame_depth)
 
         return cv_image_color, cv_image_depth
 
@@ -138,16 +191,15 @@ class CameraProcessor:
             return trans.translation.x, trans.translation.y, trans.translation.z, \
                    trans.rotation.x, trans.rotation.y, trans.rotation.z, trans.rotation.w
 
-    def generate_point_cloud(self, color_frame, depth_frame, trim_base, from_depth=False, depth_scale=1000.0, depth_trunc=1.0, align=False, Dbug=False, zoom_def=0.72):
+    def generate_point_cloud(self, color_frame, depth_frame, trim_z=1.0, from_depth=False, depth_scale=1000.0, align=False, Dbug=False, zoom_def=0.72):
         """
         Generates a point cloud from color and depth frames.
 
         :param color_frame: Color frame from the camera.
         :param depth_frame: Depth frame from the camera.
-        :param trim_base: Trim value for filtering the ground.
+        :param trim_z: Trim value for filtering the ground. This also sets the Maximum depth threshold for depth camera. Default: 1.0
         :param from_depth: Boolean flag to generate point cloud using depth-only.
         :param depth_scale: Scaling factor for depth values.
-        :param depth_trunc: Maximum depth threshold.
         :param align: Align depth to color space.
         :param Dbug: Debug mode for visualization.
         :param zoom_def: Default zoom value.
@@ -185,14 +237,12 @@ class CameraProcessor:
                 mesh = self.mesh
                 o3d.visualization.draw_geometries([pcd,mesh], window_name='01_RAW Pointcloud: from Simulated Camera', point_show_normal=True, zoom=zoom_def, front=self.front_def, lookat=self.lookat_def, up=self.up_def)
         
-            bbox = o3d.geometry.AxisAlignedBoundingBox(min_bound=(minB_X, minB_Y, minB_Z), 
-                                                   max_bound=(maxB_X, maxB_Y, maxB_Z-trim_base)) #filter ground part 
+            bbox = o3d.geometry.AxisAlignedBoundingBox(min_bound=(minB_X, minB_Y, minB_Z),max_bound=(maxB_X, maxB_Y, maxB_Z-trim_z)) #filter ground part 
             pcd = pcd.crop(bbox)
            
         else:
-            pcd = o3d.geometry.PointCloud.create_from_depth_image(depth_raw, cam.intrinsic, cam.extrinsic,
-                                                                  depth_scale, depth_trunc,
-                                                                  stride=1, project_valid_depth_only=True)
+            #Used with real depth camera
+            pcd = o3d.geometry.PointCloud.create_from_depth_image(depth_raw, cam.intrinsic, cam.extrinsic, depth_scale, trim_z, stride=1, project_valid_depth_only=True)
         
             #RAW Point cloud from depth
             if Dbug==True:
@@ -207,18 +257,20 @@ class CameraProcessor:
 
         :param offset_y: Offset in Y-axis.
         :param offset_z: Offset in Z-axis.
-        :param manual_offset: Manual depth threshold adjustment.
+        :param manual_offset: Manual depth threshold adjustment. Used with real camera
         :param trim_base: Trim value for ground filtering.
         :param Dbug: Debug mode for visualization.
         :param eval_tag: Boolean flag to transform to world coordinates.
         :return: Filtered Open3D point cloud.
         """
         zoom_def = 1.34
-        cam_robo_depth = abs(self.fetch_transform('camera_depth_optical_frame', 'panda_link0', quat=0)[2])
         color_frame, depth_frame = self.grab_frame()
-
-        downpcd = self.generate_point_cloud(color_frame, depth_frame, trim_base, from_depth=False,
-                                            depth_trunc=manual_offset + cam_robo_depth - trim_base, align=False, Dbug=Dbug)
+        
+        if self.phy:
+            cam_robo_depth = abs(self.fetch_transform('camera_depth_optical_frame', 'panda_link0', quat=0)[2])
+            downpcd = self.generate_point_cloud(color_frame, depth_frame, trim_z = manual_offset + cam_robo_depth - trim_base, from_depth=True, align=False, Dbug=Dbug) #Take from 4cm above ground
+        else:
+            downpcd = self.generate_point_cloud(color_frame, depth_frame, trim_z = trim_base, from_depth=False, align=False, Dbug=Dbug)
 
         #CROP TO FILTER OUT ROBOT'S SHADOW ADJUST OFFSET ACCORDINGLY
         PC_BBOX = downpcd.get_axis_aligned_bounding_box()
@@ -280,6 +332,9 @@ class CameraProcessor:
         :param offset_y: Offset in Y-axis.
         :param offset_z: Offset in Z-axis.
         :param manual_offset: Manual depth adjustment.
+                              Use only if the object is not on ground, or doing vertical scanning, else set to 0.
+                              This offset is used only in cases where the object is at height lower than the robot's base
+                              or while doing vertical scanning, object is not in same line as the robot's base.
         :param spacing: Spacing for downsampling.
         :param trim_base: Ground filtering trim value.
         :param Hide_prev: Whether to hide previous visualizations. default: False
@@ -973,8 +1028,24 @@ class CameraProcessor:
         :param move_group: MoveIt! move group interface.
         :param plan: The planned trajectory (RobotTrajectory).
         """
-        move_group.execute(plan, wait=True)
+        move_group.execute(plan, wait=False)
 
+    def go_to_starting_position(self, move_group, scene):
+        """
+        Moves robot to initial position. Default position is initial_coordinates_down_high_joint
+        """
+        self.go_to_joint_state(move_group, self.selected_pose_joint)
+        self.update_collision_scene(scene, alpha = 0, flip=False, obstacle=True)
+        
+    def stop_robot(self, move_group):
+        """
+        Stops robot motion.
+        :param move_group: MoveIt! move group interface.
+        """
+        move_group.stop()
+        move_group.clear_pose_targets()
+        
+        
     def validate_target(self, move_group, coord, plan_time=0.5):
         """
         validates and checks if targets are reachable.
@@ -1347,7 +1418,7 @@ class CameraProcessor:
         object_mesh = o3d.geometry.TriangleMesh()
         radii = [0.0005, 0.001, 0.002, 0.005, 0.01, 0.02, 0.04, 0.1]
         
-        pcd = self.load_point_cloud(self.samples, self.offset_y, self.offset_z, self.manual_offset, 0.01, self.trim_base, Hide_prev=True, Dbug=False, eval_tag=True) #eval_tag :generates wrt world
+        pcd = self.load_point_cloud(self.samples, self.offset_y, self.offset_z, self.manual_offset, 0.01, 0.0, Hide_prev=True, Dbug=False, eval_tag=True) #eval_tag :generates wrt world
         print(f"Created collision cloud with {len(pcd.points)} points.")
         #pcd.estimate_normals(search_param=o3d.geometry.KDTreeSearchParamHybrid(radius=0.06, max_nn=30)) #radius in meters
         #pcd.orient_normals_consistent_tangent_plane( k = round( len(pcd.points) / 6) )

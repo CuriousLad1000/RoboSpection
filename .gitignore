@@ -19,4 +19,8 @@ src/RVizMeshVisualizer/
 kokoro/
 __pycache__/
 .ipynb_checkpoints/
-
+code.zip
+path_flow.txt
+src/llama.cpp/
+src/VI_code_as_policies/
+src/Visual_Inspection/
