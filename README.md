@@ -188,6 +188,15 @@ different.
 -   Install Transformers (included in requirements.txt) best to install
     after PyTorch.
 
+
+**Note 3** Don't forget to change the absolute path inside all sdf files located in   ***RoboSpection/src/sdf_models/***  to match the absolute path on your system before running simulation. Otherwise simulated objects won't spawn in gazebo since, ros won't know where the stl files are stored. Change it for visual and collision tags inside sdf file. 
+
+default path example: 
+
+```console
+<uri>/home/user/RoboSpection/src/sdf_models/STLs/Aerofoil.stl</uri>
+```
+
 ### To run Simulation,
 
 -   In first terminal
