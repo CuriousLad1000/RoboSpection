@@ -19,7 +19,7 @@
       <visual name='visual'>
         <geometry>
           <mesh>
-            <uri>/home/shadowd/ws_CAP/src/sdf_models/STLs/Plate.stl</uri>
+            <uri>/home/user/RoboSpection/src/sdf_models/STLs/Plate.stl</uri>
             <scale>0.002 0.002 0.002</scale>
           </mesh>
         </geometry>
@@ -34,7 +34,7 @@
         <pose>0 0 0 0 0 0</pose>
         <geometry>
           <mesh>
-            <uri>/home/shadowd/ws_CAP/src/sdf_models/STLs/Plate.stl</uri>
+            <uri>/home/user/RoboSpection/src/sdf_models/STLs/Plate.stl</uri>
             <scale>0.002 0.002 0.002</scale>
           </mesh>
         </geometry>
