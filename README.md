@@ -148,7 +148,7 @@ export LD_LIBRARY_PATH=$(python3 -c "import os; import nvidia.cublas.lib; import
 **Verify using**:
 
 ```console
-echo \$LD_LIBRARY_PATH
+echo $LD_LIBRARY_PATH
 ```
 
 **Alternatively**, add the following lines manually at the end of
