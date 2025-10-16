@@ -142,7 +142,7 @@ make sure **LD_LIBRARY_PATH** has cuda\'s path included.
 You can export paths using following command:
 
 ```console 
-export LD_LIBRARY_PATH=\`python3 -c \'import os; import nvidia.cublas.lib; import nvidia.cudnn.lib; print(os.path.dirname(nvidia.cublas.lib.\_\_file\_\_) + \":\" + os.path.dirname(nvidia.cudnn.lib.\_\_file\_\_))\'\`
+export LD_LIBRARY_PATH=$(python3 -c "import os; import nvidia.cublas.lib; import nvidia.cudnn.lib; print(os.path.dirname(nvidia.cublas.lib.__file__) + ':' + os.path.dirname(nvidia.cudnn.lib.__file__))")
 ```
 
 **Verify using**:
@@ -155,11 +155,11 @@ echo \$LD_LIBRARY_PATH
 **kokoro/bin/activate** script. Don't forget to source again.
 
 ```console
-export LD_LIBRARY_PATH=\`python3 -c \'import os; import nvidia.cublas.lib; import nvidia.cudnn.lib; print(os.path.dirname(nvidia.cublas.lib.\_\_file\_\_) + \":\" + os.path.dirname(nvidia.cudnn.lib.\_\_file\_\_))\'\`
+export LD_LIBRARY_PATH=$(python3 -c "import os; import nvidia.cublas.lib; import nvidia.cudnn.lib; print(os.path.dirname(nvidia.cublas.lib.__file__) + ':' + os.path.dirname(nvidia.cudnn.lib.__file__))")
 ```
 
 ```console
-export LD_LIBRARY_PATH=/usr/lib/python3/dist-packages:\$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/usr/lib/python3/dist-packages:$LD_LIBRARY_PATH
 ```
 
 *"This fetches the path and includes to LD_LIBRARY_PATH"*
