@@ -91,7 +91,7 @@ installed.
 		```
 
     -   ```console 
-		rosdep install -y \--from-paths . \--ignore-src \--rosdistro noetic
+		rosdep install -y --from-paths . --ignore-src --rosdistro noetic
 		```
 
     - **Note** In case an upstream package is not (yet) available from the standard ROS repositories or if you experience any build errors in those packages, please try to fetch the latest release candidates from the ROS testing repositories instead. [Source](https://web.archive.org/web/20230331054045/https://ros-planning.github.io/moveit_tutorials/doc/getting_started/getting_started.html#install-ros-and-catkin)
@@ -124,7 +124,7 @@ installed.
 		```
 
     -   ```console 
-		python3.10 -m venv \--system-site-packages kokoro
+		python3.10 -m venv --system-site-packages kokoro
 		```
 
     -   ```console 
@@ -137,7 +137,7 @@ installed.
 
 **Important**: Make sure your system knows where to find the cuDNN libraries.
 
-make sure **LD_LIBRARY_PATH** has cuda\'s path included.
+make sure **LD_LIBRARY_PATH** has cuda's path included.
 
 You can export paths using following command:
 
@@ -169,7 +169,7 @@ export LD_LIBRARY_PATH=/usr/lib/python3/dist-packages:$LD_LIBRARY_PATH
 and cuDNN 9. For CUDA 11 and cuDNN 8, the current workaround is
 downgrading to the 3.24.0 version of ctranslate2, for CUDA 12 and cuDNN
 8, downgrade to the 4.4.0 version of ctranslate2, (This can be done with
-pip install \--force-reinstall ctranslate2==4.4.0 or specifying the
+pip install --force-reinstall ctranslate2==4.4.0 or specifying the
 version in a requirements.txt). src:
 <https://pypi.org/project/faster-whisper/>
 
@@ -219,7 +219,7 @@ default path example:
 		source RoboSpection/devel/setup.bash && cd RoboSpection/src/RoboSpection_code/ && jupyter notebook
 		```
 
--   Run **"Spawn_a\_model_gazebo.ipynb"** Notebook to summon various STL models to Gazebo.
+-   Run **"Spawn_a_model_gazebo.ipynb"** Notebook to summon various STL models to Gazebo.
 
 -   Run the **"HRC_LLM_VI_Speech.ipynb"** Notebook
 
@@ -368,7 +368,7 @@ https://github.com/user-attachments/assets/83b68070-1c51-4078-8ae1-8506eb676647
 
 ## Acknowledgements
 
--   This project has received funding from the European Union\'s Horizon
+-   This project has received funding from the European Union's Horizon
     Europe research and innovation programme under Grant Agreement no.
     101059903 and 101135708. In addition, we acknowledge financial
     support of the Finnish Ministry of Education and Culture through the
@@ -385,5 +385,5 @@ Under process
 
 Interested in my work? Want to discuss something?
 
-Let\'s connect on [LinkedIn](https://www.linkedin.com/in/osama-tasneem/)
+Let's connect on [LinkedIn](https://www.linkedin.com/in/osama-tasneem/)
 
