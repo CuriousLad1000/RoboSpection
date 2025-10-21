@@ -77,7 +77,30 @@ installed.
     -   ```console 
 		sudo apt install python3.10-venv 
 		```
-
+    **Note:** If the package is not available for python 3.10, then you can build it from source by following the steps below
+    - ```console
+      sudo apt-get update && sudo apt-get install -y     build-essential     libssl-dev     zlib1g-dev     libbz2-dev     libreadline-dev     libsqlite3-dev     wget     curl     llvm     libncurses5-dev     libncursesw5-dev     xz-utils     tk-dev     libffi-dev     liblzma-dev     python3-openssl     git     make     && rm -rf /var/lib/apt/lists/*
+      ```
+  - ```console
+    wget https://www.python.org/ftp/python/3.10.16/Python-3.10.16.tgz
+    ```
+    
+  - ```console
+    tar -xvzf Python-3.10.16.tgz && cd Python-3.10.16 && ./configure --enable-optimizations
+    ```
+  
+  - ```console
+    make -j$(nproc)
+    ```
+  
+  - ```console
+    make altinstall
+    ```
+  - Verify using:
+     ```console
+     python3.10 --version
+     ```
+  
 -   Download / Clone this repository
 
     -   ```console 
@@ -135,6 +158,8 @@ installed.
 		pip install -r requirements.txt
 		```
 
+	- Install PyKDL if not already present by either building from source or from package (make sure it is built with python 3.10)
+
 **Important**: Make sure your system knows where to find the cuDNN libraries.
 
 make sure **LD_LIBRARY_PATH** has cuda's path included.
@@ -161,6 +186,7 @@ export LD_LIBRARY_PATH=$(python3 -c "import os; import nvidia.cublas.lib; import
 ```console
 export LD_LIBRARY_PATH=/usr/lib/python3/dist-packages:$LD_LIBRARY_PATH
 ```
+
 
 *"This fetches the path and includes to LD_LIBRARY_PATH"*
 
