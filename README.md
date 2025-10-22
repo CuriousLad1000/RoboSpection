@@ -407,7 +407,24 @@ https://github.com/user-attachments/assets/83b68070-1c51-4078-8ae1-8506eb676647
 
 ## Publication and Citation
 
-Under process
+Research paper: (https://doi.org/10.1016/j.rcim.2025.103154)
+
+If you like my work and would like to support me, please cite this work as:
+
+```bib
+@article{TASNEEM2026103154,
+title = {Human–robot collaborative visual inspection with Large Language Models},
+journal = {Robotics and Computer-Integrated Manufacturing},
+volume = {98},
+pages = {103154},
+year = {2026},
+issn = {0736-5845},
+doi = {https://doi.org/10.1016/j.rcim.2025.103154},
+url = {https://www.sciencedirect.com/science/article/pii/S073658452500208X},
+author = {Osama Tasneem and Roel Pieters},
+keywords = {Human–robot collaboration, Natural language processing, Large Language Models, Local LLM, Generative AI, Prompt engineering, Auto path planning, Visual inspection},
+}
+```
 
 Interested in my work? Want to discuss something?
 
