@@ -59,10 +59,45 @@ practicality and robustness in realistic deployment settings.
 -   All required dependencies (See installation instructions on how to
     install)
 
-**Note:** All codes were tested on Ubuntu 20.04.6 LTS with ROS Noetic
-installed.
+**Note:** All codes were tested on Ubuntu 20.04.6 LTS with ROS Noetic installed.
 
-## Installation
+You can either use the pre-built [**Docker image**](https://hub.docker.com/r/cogrobot/robospection-ros-noetic) or follow the steps mentioned under [**Manual Installation**](https://github.com/CuriousLad1000/RoboSpection#manual-installation) to get started with the Robospection.
+
+
+## Docker image
+
+This is by far the easiest way to get started with this project. The docker image is based on ROS noetic running on top of ubuntu 20.04 and already contains all tools, packages, drivers, ROS-noetic, Franka control and code.
+-   Install Docker
+  - ```console
+    sudo apt update && sudo apt install -y docker.io
+    ```
+  - ```console
+    sudo systemctl enable --now docker
+    ```
+  - Add a user for docker
+  - ```console
+    sudo usermod -aG docker $USER
+    ```
+  - Install Nvidia container toolkit
+  - ```console
+    curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg   && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list |     sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' |     sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+    ```
+  - ```console
+    sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit
+    ```
+  - Restart Docker and reload daemon
+  - ```console
+    sudo systemctl restart docker && systemctl daemon-reload
+    ```
+  - You can test nvidia gpu passthrough using
+  - ```console
+    docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
+    ```
+
+- Follow rest of the instructions as stated in the section [**Getting started**](https://hub.docker.com/r/cogrobot/robospection-ros-noetic#-getting-started).
+
+
+## Manual Installation
 
 -   Install Moveit and test with Franka panda
     [Tutorial](https://web.archive.org/web/20240223055617/https://ros-planning.github.io/moveit_tutorials/index.html)
