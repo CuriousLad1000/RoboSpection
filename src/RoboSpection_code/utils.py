@@ -962,7 +962,7 @@ class CameraProcessor:
         """
         return robot.get_current_state()    
 
-    def plan_cartesian_path(self, move_group, Batch_Profiles, eef_step=0.01, velocity_scale=0.1, acceleration_scale=0.1):
+    def plan_cartesian_path(self, move_group, Batch_Profiles, eef_step=0.01, jump_threshold=0.0, velocity_scale=0.1, acceleration_scale=0.1):
         """
         Plans a Cartesian path for the robot using MoveIt!.
     
@@ -1416,8 +1416,11 @@ class CameraProcessor:
         planning_scene.remove_world_object()
         object_mesh = o3d.geometry.TriangleMesh()
         radii = [0.0005, 0.001, 0.002, 0.005, 0.01, 0.02, 0.04, 0.1]
-        
-        pcd = self.load_point_cloud(self.samples, self.offset_y, self.offset_z, self.manual_offset, 0.01, 0.0, Hide_prev=True, Dbug=False, eval_tag=True) #eval_tag :generates wrt world
+
+        if self.phy:
+            pcd = self.load_point_cloud(self.samples, self.offset_y, self.offset_z, self.manual_offset, 0.01, 0.0, Hide_prev=True, Dbug=False, eval_tag=True) #eval_tag :generates wrt world
+        else:
+            pcd = self.load_point_cloud(self.samples, self.offset_y, self.offset_z, self.manual_offset, 0.01, self.trim_base, Hide_prev=True, Dbug=False, eval_tag=True) #eval_tag :generates wrt world
         print(f"Created collision cloud with {len(pcd.points)} points.")
         #pcd.estimate_normals(search_param=o3d.geometry.KDTreeSearchParamHybrid(radius=0.06, max_nn=30)) #radius in meters
         #pcd.orient_normals_consistent_tangent_plane( k = round( len(pcd.points) / 6) )
