@@ -962,14 +962,13 @@ class CameraProcessor:
         """
         return robot.get_current_state()    
 
-    def plan_cartesian_path(self, move_group, Batch_Profiles, eef_step=0.01, jump_threshold=0.0, velocity_scale=0.1, acceleration_scale=0.1):
+    def plan_cartesian_path(self, move_group, Batch_Profiles, eef_step=0.01, velocity_scale=0.1, acceleration_scale=0.1):
         """
         Plans a Cartesian path for the robot using MoveIt!.
     
         :param move_group: MoveIt! MoveGroupCommander instance.
         :param Batch_Profiles: List of multiple profiles containing camera and end-effector targets [cam_tgt, eef_tgt].
         :param eef_step: Step size for end-effector movement (default: 0.01).
-        :param jump_threshold: Maximum allowed jump in joint-space (default: 0.0 to disable jump detection).
         :param velocity_scale: Scaling factor for velocity (default: 0.5).
         :param acceleration_scale: Scaling factor for acceleration (default: 0.5)
         :return: Tuple (trajectory, fraction), where:
@@ -997,7 +996,7 @@ class CameraProcessor:
         (trajectory, fraction) = move_group.compute_cartesian_path(
             waypoints,  # Waypoints list
             eef_step,   # Step size between waypoints
-            jump_threshold  # Maximum allowed joint-space jump
+            avoid_collisions=True
         )
         trajectory = move_group.retime_trajectory(move_group.get_current_state(), trajectory, 
                                            velocity_scaling_factor = velocity_scale, 
